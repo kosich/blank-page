@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <title>BLANK PAGE</title>
+        <meta name="description" content="A simple minimalistic blank page to store notes">
+
+        <style>
+            html,
+            body,
+            textarea {
+                height: 100%;
+                box-sizing: border-box;
+                margin: 0;
+            }
+
+            body {
+                padding: 1rem 2rem;
+                background: #60b5ff;
+            }
+
+            textarea {
+                width: 100%;
+                padding: 1rem;
+                border: 1px solid #fefefe;
+                font-family: "Courier New", Courier, monospace;
+                font-size: 16px;
+                box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+                border-radius: 3px;
+            }
+
+            textarea:focus {
+                outline: none
+            }
+        </style>
+    </head>
+
+    <body>
+        <textarea id="textarea" autofocus spellcheck="false"></textarea>
+
+        <script>
+            (function () {
+                'use strict';
+
+                var LOCAL_STORAGE_KEY = 'NOTE-VALUE';
+
+                var textarea = document.getElementById('textarea')
+
+                textarea.addEventListener('keyup', saveText);
+                textarea.addEventListener('change', saveText);
+
+                loadText();
+
+                function loadText() {
+                    textarea.innerHTML = window.localStorage.getItem(LOCAL_STORAGE_KEY);
+                }
+
+                function saveText() {
+                    var text = textarea.value;
+                    window.localStorage.setItem(LOCAL_STORAGE_KEY, text);
+                }
+            })();
+        </script>
+    </body>
+</html>
