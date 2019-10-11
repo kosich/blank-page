@@ -4,6 +4,7 @@
         <meta name="description" content="A simple blank page to store notes">
         <meta name="viewport" content="width=device-width">
 
+        <link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet">
         <style>
             html,
             body {
@@ -12,15 +13,27 @@
                 margin: 0;
                 padding: 0;
             }
+            
+            body {
+                padding: 3px;
+                background: #57a2e2;
+                background: -webkit-linear-gradient(to bottom, #57a2e2, #3988bd);
+                background: linear-gradient(to bottom, #57a2e2, #3988bd);
+            }
 
-            textarea {
-                box-sizing: border-box;
+            textarea box-sizing: border-box;
                 height: 100%;
                 width: 100%;
-                padding: 1rem;
-                font-family: "Courier New", Courier, monospace;
-                font-size: 18px;
+                padding: 1.5rem 1rem;
+                font-family: 'Inconsolata', monospace;
+                font-size: 21px;
                 resize: none;
+                border: none;
+                border-radius: 2px;
+                max-width: 720px;
+                margin: 0 auto;
+                display: block;
+                box-shadow: 0 0 2px 1px rgba(0,0,0,0.15);
             }
 
             textarea:focus {
