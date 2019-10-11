@@ -1,30 +1,26 @@
 <html>
     <head>
         <title>BLANK PAGE</title>
-        <meta name="description" content="A simple minimalistic blank page to store notes">
+        <meta name="description" content="A simple blank page to store notes">
+        <meta name="viewport" content="width=device-width">
 
         <style>
             html,
-            body,
-            textarea {
+            body {
                 height: 100%;
                 box-sizing: border-box;
                 margin: 0;
-            }
-
-            body {
-                padding: 1rem 2rem;
-                background: #60b5ff;
+                padding: 0;
             }
 
             textarea {
+                box-sizing: border-box;
+                height: 100%;
                 width: 100%;
                 padding: 1rem;
-                border: 1px solid #fefefe;
                 font-family: "Courier New", Courier, monospace;
-                font-size: 16px;
-                box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
-                border-radius: 3px;
+                font-size: 18px;
+                resize: none;
             }
 
             textarea:focus {
@@ -34,7 +30,7 @@
     </head>
 
     <body>
-        <textarea id="textarea" autofocus spellcheck="false"></textarea>
+        <textarea id="textarea" autofocus spellcheck="false" placeholder="All your notes will be stored in your browser storage"></textarea>
 
         <script>
             (function () {
