@@ -1,75 +1,96 @@
 <html>
-    <head>
-        <title>BLANK PAGE</title>
-        <meta name="description" content="A simple blank page to store notes">
-        <meta name="viewport" content="width=device-width">
 
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap&subset=cyrillic" rel="stylesheet">
-        <style>
-            html,
-            body {
-                height: 100%;
-                box-sizing: border-box;
-                margin: 0;
-                padding: 0;
-                overscroll-behavior-y: none;
-                overscroll-behavior-x: none;
+<head>
+    <title>blnk.page</title>
+    <meta name="description" content="A minimalistic browser storage note taking app">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link id="favicon" rel="icon" href="/favicon.ico">
+
+    <link id="google-font" href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap&subset=cyrillic" rel="stylesheet">
+
+    <style>
+        html,
+        body {
+            height: 100%;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            overscroll-behavior: none;
+        }
+
+        textarea {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 18px;
+
+            min-height: 100%;
+            overflow: hidden;
+            width: 100%;
+            max-width: 680px;
+            box-sizing: border-box;
+            padding: 1.25rem 1rem;
+            resize: none;
+            border: none;
+            margin: 0 auto;
+            display: block;
+
+            border-bottom: 1px red solid;
+        }
+
+        textarea:focus {
+            outline: none
+        }
+    </style>
+</head>
+
+<body>
+    <textarea id="textarea" autofocus spellcheck="false"
+        placeholder="All your notes will be stored in your browser storage"></textarea>
+
+    <script>
+        (function () {
+            'use strict';
+
+            var LOCAL_STORAGE_KEY = 'NOTE-VALUE';
+
+            var fontLink = document.querySelector('#google-font');
+            fontLink.onload = onFontsLoaded;
+
+            var textarea = document.getElementById('textarea');
+            textarea.addEventListener('input', onChange);
+
+            loadText();
+            updateHeight();
+
+            function onFontsLoaded() {
+                setTimeout(updateHeight, 100);
             }
-            
-            body {
-                padding: 3px;
-                background: #57a2e2;
-                background: -webkit-linear-gradient(to bottom, #57a2e2, #3988bd);
-                background: linear-gradient(to bottom, #57a2e2, #3988bd);
+
+            function loadText() {
+                textarea.innerHTML = window.localStorage.getItem(LOCAL_STORAGE_KEY);
             }
 
-            textarea {
-                box-sizing: border-box;
-                height: 100%;
-                width: 100%;
-                padding: 1.25rem 1rem;
-                font-family: 'Roboto Mono', monospace;
-                font-size: 18px;
-                resize: none;
-                border: none;
-                border-radius: 2px;
-                max-width: 680px;
-                margin: 0 auto;
-                display: block;
-                box-shadow: 0 0 2px 1px rgba(0,0,0,0.15);
+            function onChange(){
+                saveText();
+                updateHeight();
             }
 
-            textarea:focus {
-                outline: none
+            function saveText() {
+                var text = textarea.value;
+                window.localStorage.setItem(LOCAL_STORAGE_KEY, text);
             }
-        </style>
-    </head>
 
-    <body>
-        <textarea id="textarea" autofocus spellcheck="false" placeholder="All your notes will be stored in your browser storage"></textarea>
+            function updateHeight() {
+                // preserve scroll by keeping document body height 
+                document.body.style.height = document.body.scrollHeight + 'px';
+                // read & update textarea with height
+                textarea.style.height = '1px';
+                textarea.style.height = textarea.scrollHeight + 'px';
+                // reset document body height
+                document.body.style.height = null;
+            }
+        })();
+    </script>
+</body>
 
-        <script>
-            (function () {
-                'use strict';
-
-                var LOCAL_STORAGE_KEY = 'NOTE-VALUE';
-
-                var textarea = document.getElementById('textarea')
-
-                textarea.addEventListener('keyup', saveText);
-                textarea.addEventListener('change', saveText);
-
-                loadText();
-
-                function loadText() {
-                    textarea.innerHTML = window.localStorage.getItem(LOCAL_STORAGE_KEY);
-                }
-
-                function saveText() {
-                    var text = textarea.value;
-                    window.localStorage.setItem(LOCAL_STORAGE_KEY, text);
-                }
-            })();
-        </script>
-    </body>
 </html>
